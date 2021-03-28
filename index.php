@@ -51,6 +51,13 @@
 </body>
 </html>
 
-<?php 
-echo "PHP Script Here!";
+<?php
+require_once 'connect.php';
+$sql = "SELECT * FROM guide";
+$result = mysqli_query($link, $sql) or die(mysqli_error($link));
+
+echo "<h2>Test</h2><br>";
+while($row = mysqli_fetch_array($result)) {
+    echo "Guide name " . $row['Name'] . "<br>";
+}
 ?>
