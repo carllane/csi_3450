@@ -13,7 +13,7 @@
         <a href="tours.php">Tours</a>
         <a href="index.php">About Us</a>
         <br>
-        <a href="manage.php>">Manage</a>
+        <a href="manage.php">Manage</a>
     </div>
     <div class="main">
         <table>
