@@ -13,7 +13,7 @@
         <a href="tours.php">Tours</a>
         <a href="index.php">About Us</a>
         <br>
-        <a class="active" href="manage.php>">Manage</a>
+        <a class="active" href="manage.php">Manage</a>
     </div>
     <div class="main">
         <h3>Placeholder for manage page</h3> <br><br><br><br><br>
