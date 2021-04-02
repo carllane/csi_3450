@@ -60,11 +60,17 @@ caption {
     font-size: 22px;
     color: #373833;
     display: block;
+    margin: 2px;
+}
+
+.sidenav a.active {
+    color: #e8eae3;
+    background-color: #fa2742;
 }
 
 .sidenav a:hover {
     color: #e8eae3;
-    background-color: #fa2742;
+    background-color: rgba(51, 51, 51, 0.5);
 }
 
 .main {

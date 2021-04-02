@@ -9,11 +9,11 @@
         <h1>Art Gallery Management System</h1>
     </div>
     <div class="sidenav">
-        <a href="#artwork">Artwork</a>
-        <a href="#tours">Tours</a>
-        <a href="#about">About Us</a>
+        <a href="artwork.php">Artwork</a>
+        <a href="tours.php">Tours</a>
+        <a class="active" href="index.php">About Us</a>
         <br>
-        <a href="#manage>">Manage</a>
+        <a href="manage.php">Manage</a>
     </div>
     <div class="main">
         <table>
