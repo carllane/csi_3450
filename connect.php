@@ -1,7 +1,7 @@
 <?php
 $user = 'root';
 $password = '';
-$db = 'gallery';
+$db = 'gallerydb';
 $host = 'localhost';
 $port = 3306;
 
