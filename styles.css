@@ -165,4 +165,5 @@ input[type=email]:focus {
     padding: 10px;
     border-bottom: 3px solid #37383333;
     border-radius: 6px;
+    margin: 30px 0;
 }
