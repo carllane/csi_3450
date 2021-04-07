@@ -96,6 +96,44 @@ button:hover {
     color: #e8eae3;
 }
 
+input[type=submit] {
+    background-color: #e8eae3;
+    border: 2px solid #fa2742;
+    color: #fa2742;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #fa274280;
+    color: #e8eae3;
+}
+
+input[type=reset] {
+    background-color: #e8eae3;
+    border: 2px solid #373833;
+    color: #373833;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+input[type=reset]:hover {
+    background-color: #37383380;
+    color: #e8eae3;
+}
+
 input[type=email] {
     width: 80vw;
     padding: 12px 20px;
@@ -111,17 +149,20 @@ input[type=email]:focus {
     border: 3px solid #fa2742;
 }
 
-.user_tours {
-    width: 80vw;
-    padding: 12px 20px;
-    margin: 20px 0;
-    box-sizing: border-box;
-    border-top: 2px solid #373833;
-    border-bottom: 2px solid #373833;
-    border-radius: 5px;
-    background-color: peachpuff;
+.dropdown {
+    background-color: #e8eae3;
+    color: #373833;
+    border: 2px solid #373833;
+    font-size: 16px;
+    text-align: center;
+    padding: 8px 16px;
+    display: inline-block;
+    margin: 5px;
 }
 
-.user_tours h3 {
-    margin:  0 0 14px 0;
+.search-tours-form {
+    background-color: bisque;
+    padding: 10px;
+    border-bottom: 3px solid #37383333;
+    border-radius: 6px;
 }
