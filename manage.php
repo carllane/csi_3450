@@ -16,8 +16,37 @@
         <a class="active" href="manage.php">Manage</a>
     </div>
     <div class="main">
-        <h3>Placeholder for manage page</h3> <br><br><br><br><br>
+        <table>
+            <!-- <caption>Artwork</caption> -->
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Artist</th>
+                <th>Year</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Movement</th>
+            </tr>
+
+
+            <tr>
+                <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/300px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg" alt="Mona Lisa" ></td>
+                <td><i>Mona Lisa</i></td>
+                <td>Leonardo de Vinci</td>
+                <td>1517</td>
+                <td>$100 million</td>
+                <td>Painting</td>
+                <td>Renaissance</td>
+                
+                
+            </tr>
+        
+        </table>
     </div> 
+    <div class ='btn'>
+    <input type ='button' class = 'but btn' value = 'Edit'>
+    <input type ='button' class = 'but btn' value = 'delete'>
+    </div>
 </body>
 </html>
 
