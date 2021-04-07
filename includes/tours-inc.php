@@ -16,7 +16,8 @@ if (isset($_POST['submit'])) {
     # Append Search Query Results to a content string
     if ($results !== false) {
         while($row = mysqli_fetch_array($results)) {
-            $content .= "Guide name " . $row['Name'] . ", Tour Date " . $row['TourDate']  . ", Tour Time " . $row['TourTime'] ."<br>";
+            $content .= "Guide name " . $row['Name'] . ", Tour Date " . $row['TourDate']  . ", Tour Time " . $row['TourTime'];
+            $content .= "<button style='position:absolute;right:20px'>Book</button><br><br>";
         }
     }
 
