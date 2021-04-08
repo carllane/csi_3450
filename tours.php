@@ -24,12 +24,41 @@ session_start();
     <a href="manage.php">Manage</a>
 </div>
 <div class="main">
-    <!-- <h2>Your Upcoming Tours</h2>
-    <form action="get_user_tours.php" method="POST">
-    <label for="email">Enter your email: </label><br>
-    <input type="email" id="email" name="email">
-    </form>
-    <div class="user_tours">
+    <section>
+        <?php
+        if (isset($_SESSION['visitor-logged-in'])) {
+            $visitor_id = $_SESSION['visitor-logged-in'];
+
+            $sql  = "SELECT Name AS tguide, PhoneNum AS tphone, Date(TourDateTime) AS tdate, Time(TourDateTime) AS ttime ";
+            $sql .= "FROM tourvisitor ";
+            $sql .= "INNER JOIN guide ";
+            $sql .= "ON tourvisitor.TourGuideID = guide.ID ";
+            $sql .= "WHERE tourvisitor.VisitorID='" . $visitor_id . "' ";
+            $sql .= "ORDER BY tourvisitor.TourDateTime";
+            $result = mysqli_query($link, $sql) or die(mysqli_error($link));
+            
+            echo "<h3>Your Upcoming Tours</h3>";
+            if (mysqli_num_rows($result) > 0) {
+                echo "<table style='width:80%'>";
+                echo "<tr><th>Guide</th><th>Date</th><th>Time</th><th>Contact</th></tr>";
+                while($row = mysqli_fetch_array($result)) {
+                    echo "<tr>";
+                    echo "<td>" . $row['tguide'] . "</td>";
+                    $date_display = date("m/d/Y", strtotime($row['tdate']));
+                    echo "<td>" . $date_display . "</td>";
+                    $time_display = substr($row['ttime'], 0,5);
+                    echo "<td>" . $time_display . "</td>";
+                    echo "<td>" . $row['tphone'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "You do not have booked any upcoming tours.";
+            }
+        }
+        ?>
+    </section>
+    <!-- 
         // if (isset($_REQUEST['visitor_id'])) {
         //     $visitor_id = $_REQUEST['visitor_id'];
         //     $sql = "SELECT Name FROM visitor WHERE ID = '" . $visitor_id . "'";
@@ -37,20 +66,7 @@ session_start();
         
         //     echo "<h3>Tours for " . $result -> fetch_array()['Name'] . "</h3>";
         
-        //     $sql  = "SELECT Name, PhoneNum, Date(TourDateTime) AS tdate, Time(TourDateTime) AS ttime ";
-        //     $sql .= "FROM tourvisitor ";
-        //     $sql .= "INNER JOIN guide ";
-        //     $sql .= "ON tourvisitor.TourGuideID = guide.ID ";
-        //     $sql .= "WHERE tourvisitor.VisitorID='" . $visitor_id . "' ";
-        //     $sql .= "ORDER BY tourvisitor.TourDateTime";
-        //     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
-        
-        //     while($row = mysqli_fetch_array($result)) {
-            //         echo $row['Name'];
-            //         // echo $row['PhoneNum'] . ") ";
-            //         echo " on " . $row['tdate'];
-            //         echo " at " . $row['ttime'] . "<br>";
-            //     }
+
             // } else {
             //     echo "<p>No email entered!</p>";
         // }
