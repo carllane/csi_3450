@@ -14,13 +14,17 @@ if (isset($_POST['submit'])) {
     $content = "";
 
     # Append Search Query Results to a content string
-    if ($results !== false) {
+    if ($results !== false && mysqli_num_rows($results) > 0) {
+        $content .= "<table style='margin-left:20px;width:50%' class='search-table'>";
+        $content .= "<tr><th>Guide</td><th>Tour Date</th><th>Tour Time</th><th></th></tr>";
         while($row = mysqli_fetch_array($results)) {
-            $content .= "Guide name " . $row['Name'] . ", Tour Date " . $row['TourDate']  . ", Tour Time " . $row['TourTime'];
-            // $content .= "<button type='submit' formmethod='post' formaction='index.php' style='position:absolute;right:20px'>Book</button><br><br>";
-            $content .= "<a class='button-link' href='includes/tours-book-inc.php?btguide=".$row['Name']."&btdate="
-                .$row['TourDate']."&bttime=".$row['TourTime']."' style='position:absolute;right:20px'>Book</a><br><br>";
+            $content .= "<tr><td>" . $row['Name'] . "</td><td>" . $row['TourDate']  . "</td><td>" . $row['TourTime'] . "</td>";
+            $content .= "<td><div><a class='button-link' style='margin: -5px -35px;border:none;padding: 10px 40px;' href='includes/tours-book-inc.php?btguide=".$row['Name']."&btdate="
+                .$row['TourDate']."&bttime=".$row['TourTime']."'>Book</a></div></td></tr>";
         }
+        $content .= "</table>";
+    } else {
+        $content .= "<p style='text-align:center'>No tours met the search criteria.</p>";
     }
 
     # Debug statements

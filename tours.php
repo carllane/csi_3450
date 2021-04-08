@@ -39,7 +39,7 @@ session_start();
             
             echo "<h3>Your Upcoming Tours</h3>";
             if (mysqli_num_rows($result) > 0) {
-                echo "<table style='width:80%'>";
+                echo "<table style='width:50%;margin-left:20px' class='upcoming-table'>";
                 echo "<tr><th>Guide</th><th>Date</th><th>Time</th><th>Contact</th></tr>";
                 while($row = mysqli_fetch_array($result)) {
                     echo "<tr>";
@@ -58,21 +58,8 @@ session_start();
         }
         ?>
     </section>
-    <!-- 
-        // if (isset($_REQUEST['visitor_id'])) {
-        //     $visitor_id = $_REQUEST['visitor_id'];
-        //     $sql = "SELECT Name FROM visitor WHERE ID = '" . $visitor_id . "'";
-        //     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
-        
-        //     echo "<h3>Tours for " . $result -> fetch_array()['Name'] . "</h3>";
-        
-
-            // } else {
-            //     echo "<p>No email entered!</p>";
-        // }
-    </div> -->
     <section>
-        <h3>Search Tours</h3>
+        <h3 style="margin-top: 45px;">Search Tours</h3>
         <form action="includes/tours-search-inc.php" method="POST" class="form">
             <label for="tguide">Guide</label>
             <select class="dropdown" id="tguide" name="tguide">

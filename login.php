@@ -16,7 +16,7 @@ session_start();
 </div>
 <div class="main">
     <section>
-        <h2>Please log in!</h2>
+        <h2>Log in!</h2>
         <form action="includes/login-inc.php" method="POST" class="form">
             <label for="email">Email</label><br>
             <input type="email" name="email" id="email"></input><br>

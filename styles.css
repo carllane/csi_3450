@@ -186,3 +186,7 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus {
     border-radius: 6px;
     margin: 30px 30px 30px 0;
 }
+
+.upcoming-table th, .search-table th {
+    background-color: rgba(85, 107, 47, 0.705);
+}
