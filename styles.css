@@ -96,7 +96,7 @@ button:hover {
     color: #e8eae3;
 }
 
-input[type=submit] {
+input[type=submit], .submit {
     background-color: #e8eae3;
     border: 2px solid #fa2742;
     color: #fa2742;
@@ -110,7 +110,7 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover, .submit:hover {
     background-color: #fa274280;
     color: #e8eae3;
 }
@@ -134,7 +134,26 @@ input[type=reset]:hover {
     color: #e8eae3;
 }
 
-input[type=email] {
+.button-link {
+    background-color: #e8eae3;
+    border: 2px solid #003756;
+    color:#003756;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button-link:hover {
+    background-color: #00375680;
+    color: #e8eae3;
+}
+
+input[type=email], input[type=password], input[type=text] {
     width: 80vw;
     padding: 12px 20px;
     margin: 8px 0;
@@ -145,7 +164,7 @@ input[type=email] {
     outline: none;
 }
 
-input[type=email]:focus {
+input[type=email]:focus, input[type=password]:focus, input[type=text]:focus {
     border: 3px solid #fa2742;
 }
 
@@ -160,10 +179,10 @@ input[type=email]:focus {
     margin: 5px;
 }
 
-.search-tours-form {
+.form {
     background-color: bisque;
-    padding: 10px;
+    padding: 20px;
     border-bottom: 3px solid #37383333;
     border-radius: 6px;
-    margin: 30px 0;
+    margin: 30px 30px 30px 0;
 }

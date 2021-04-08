@@ -17,7 +17,9 @@ if (isset($_POST['submit'])) {
     if ($results !== false) {
         while($row = mysqli_fetch_array($results)) {
             $content .= "Guide name " . $row['Name'] . ", Tour Date " . $row['TourDate']  . ", Tour Time " . $row['TourTime'];
-            $content .= "<button style='position:absolute;right:20px'>Book</button><br><br>";
+            // $content .= "<button type='submit' formmethod='post' formaction='index.php' style='position:absolute;right:20px'>Book</button><br><br>";
+            $content .= "<a class='button-link' href='includes/tours-book-inc.php?btguide=".$row['Name']."&btdate="
+                .$row['TourDate']."&bttime=".$row['TourTime']."' style='position:absolute;right:20px'>Book</a><br><br>";
         }
     }
 

@@ -1,5 +1,73 @@
 <?php
 
+/*
+    Functions related to login/signup
+*/
+
+function verifyVisitorLogin($link,$email, $pass) {
+    $sql = "SELECT ID FROM visitor WHERE Email = ? AND Password = ?";
+
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../login.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $email, $pass);
+    mysqli_stmt_execute($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+
+    $visitorId = -1;
+
+    if ($resultData !== false) {
+        $row = mysqli_fetch_array($resultData);
+        $visitorId = $row['ID'];
+    }
+
+    return $visitorId;
+}
+
+function anyEmptyFields($name, $email, $pass, $phone) {
+    return empty($name) || empty($email) || empty($pass) || empty($phone);
+}
+
+function existingEmail($link, $email) {
+    $sql = "SELECT Email FROM visitor WHERE Email= ?";
+
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../signup.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+
+    $row = mysqli_fetch_array($result);
+    return $row['Email'] !== null;
+}
+
+function createVisitor($link,$name,$email,$pass,$phone) {
+    $sql = "INSERT INTO visitor (Name, Email, Password, PhoneNum) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../signup.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $pass, $phone);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
+/*
+    Functions related to search for available tours
+*/
+
 # Returns whether a search form field is left as default
 function isSpecified($field) {
     return $field !== '*';

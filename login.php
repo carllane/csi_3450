@@ -1,0 +1,29 @@
+<?php 
+require_once 'connect.php';
+include_once 'includes/header.php';
+session_start();
+?>
+<div class="header">
+    <h1>Art Gallery Tours</h1>
+    <a class="button-link" href="signup.php" style="position: fixed; top:50px; right:30px">Sign Up</a>
+</div>
+<div class="sidenav">
+    <a href="artwork.php">Artwork</a>
+    <a href="tours.php">Tours</a>
+    <a href="index.php">About Us</a>
+    <br>
+    <a href="manage.php">Manage</a>
+</div>
+<div class="main">
+    <section>
+        <h2>Please log in!</h2>
+        <form action="includes/login-inc.php" method="POST" class="form">
+            <label for="email">Email</label><br>
+            <input type="email" name="email" id="email"></input><br>
+            <label for="pass">Password</label><br>
+            <input type="password" name="pass" id="pass"></input><br>
+            <input type="submit" name="submit" value="Log In" style="position:relative;margin-top:30px">
+        </form>
+    </section>
+</div> 
+<?php include_once 'includes/footer.php'; ?>

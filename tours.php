@@ -5,6 +5,16 @@ session_start();
 ?>
 <div class="header">
     <h1>Art Gallery Tours</h1>
+    <?php
+        if (isset($_SESSION['visitor-logged-in'])) {
+            $sql = "SELECT Name FROM visitor WHERE ID=" .$_SESSION['visitor-logged-in'];
+            $result = mysqli_query($link, $sql) or die(mysqli_error($link));
+            $row = mysqli_fetch_array($result);
+            echo "<p style='text-align:center'>Logged in as " . $row['Name']."</p>";
+        } else {
+            echo "<p style='text-align:center;color:#fa2742'><strong>Not Logged In!</strong></p>";
+        }
+    ?>
 </div>
 <div class="sidenav">
     <a href="artwork.php">Artwork</a>
@@ -47,8 +57,8 @@ session_start();
     </div> -->
     <section>
         <h3>Search Tours</h3>
-        <form action="includes/tours-inc.php" method="POST" class="search-tours-form">
-            <label for="guide">Guide</label>
+        <form action="includes/tours-search-inc.php" method="POST" class="form">
+            <label for="tguide">Guide</label>
             <select class="dropdown" id="tguide" name="tguide">
                 <?php 
                     if(isset($_SESSION["tguide"])) {
@@ -58,9 +68,15 @@ session_start();
                     }
                 ?>
                 <option value='*'>Any</option>
-                <option value="Bridget Bytner">Bridget Bytner</option>
-                <option value="Carl Lane">Carl Lane</option>
-                <option value="Dan Sumindan">Dan Sumindan</option>
+
+                <?php 
+                    $sql = "SELECT * FROM GUIDE";
+                    $result = mysqli_query($link, $sql) or die(mysqli_error($link));
+
+                    while($row = mysqli_fetch_array($result)) {
+                        echo "<option value='".$row['Name']."'>".$row['Name']."</option>";
+                    }
+                ?>
             </select>
 
             <label style="margin-left: 15%;" for="tmonth">Tour Date</label>
@@ -161,9 +177,13 @@ session_start();
             </select>
 
             <input type="submit" name="submit" value="Search" style="position:absolute; right: 60px">
-            <!-- <input type="reset" style="position:absolute; right: 20px"> -->
         </form>
-        <?php 
+        <?php
+            if (!isset($_SESSION['visitor-logged-in'])) {
+                echo '<a class="button-link" href="login.php" style="position: fixed; top:50px; right:30px">Log In / Sign Up</a>';
+            } else {
+                echo '<a class="button-link" href="includes/logout-inc.php" style="position: fixed; top:50px; right:25px">Log Out</a>';
+            }
             # Existing search query content
             if (isset($_SESSION["search-content"])) {
                 $content = $_SESSION["search-content"];
