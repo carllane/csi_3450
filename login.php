@@ -6,6 +6,20 @@ session_start();
 <div class="header">
     <h1>Art Gallery Tours</h1>
     <a class="button-link" href="signup.php" style="position: fixed; top:50px; right:30px">Sign Up</a>
+    <?php 
+        if(isset($_GET['error'])) {
+            $error = $_GET['error'];
+            $message;
+            if ($error === 'empty') {
+                $message = 'Please fill all fields!';
+            } else if ($error === 'wrongpass' or $error === 'stmtfailed') {
+                $message = 'Incorrect password!';
+            } else if ($error === 'stmtfailed') {
+                $message = 'Could not login, please try again!';
+            }
+            echo "<p style='text-align:center;color:#fa2742'><strong>".$message."</strong></p>";
+        }
+    ?>
 </div>
 <div class="sidenav">
     <a href="artwork.php">Artwork</a>

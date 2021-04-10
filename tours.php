@@ -39,7 +39,7 @@ session_start();
             
             echo "<h3>Your Upcoming Tours</h3>";
             if (mysqli_num_rows($result) > 0) {
-                echo "<table style='width:50%;margin-left:20px' class='upcoming-table'>";
+                echo "<table style='width:60%;margin-left:20px' class='upcoming-table'>";
                 echo "<tr><th>Guide</th><th>Date</th><th>Time</th><th>Contact</th><th></th></tr>";
                 while($row = mysqli_fetch_array($result)) {
                     echo "<tr>";
