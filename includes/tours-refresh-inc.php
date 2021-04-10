@@ -1,10 +1,11 @@
-<?php
-if (isset($_POST['submit'])) {
-    # Grab POST data from Search Tours form
-    $guide = $_POST['tguide'];
-    $month = $_POST['tmonth'];
-    $day = $_POST['tday'];
-    $year = $_POST['tyear'];
+<?php 
+
+if (isset($_GET['refresh'])) {
+    session_start();
+    $guide = $_SESSION["tguide"];
+    $month = $_SESSION["tmonth"];
+    $day = $_SESSION["tday"];
+    $year = $_SESSION["tyear"];
 
     require_once '../connect.php';
     require_once 'functions-inc.php';
@@ -28,24 +29,9 @@ if (isset($_POST['submit'])) {
         $content .= "<p style='text-align:center'>No tours met the search criteria.</p>";
     }
 
-    # Debug statements
-    echo $guide . ", " . $month . ", " . $day . ", " . $year . "<br>";
-    echo $content;
-
-    # Pass content string to session
-    session_start();
     $_SESSION["search-content"] = $content;
-    $_SESSION["tguide"] = $guide;
-    $_SESSION["tmonth"] = $month;
-    $_SESSION["tday"] = $day;
-    $_SESSION["tyear"] = $year;
 
     # Redirect page back to tours
-    header("location: ../tours.php");
-    exit();
-
-} else {
-    # Page accessed without clicking on 'search'
     header("location: ../tours.php");
     exit();
 }

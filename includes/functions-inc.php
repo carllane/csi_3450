@@ -20,7 +20,7 @@ function verifyVisitorLogin($link,$email, $pass) {
 
     $visitorId = -1;
 
-    if ($resultData !== false) {
+    if ($resultData !== false && mysqli_num_rows($resultData) > 0) {
         $row = mysqli_fetch_array($resultData);
         $visitorId = $row['ID'];
     }
@@ -65,6 +65,141 @@ function createVisitor($link,$name,$email,$pass,$phone) {
 }
 
 /*
+Functions related to book / delete specific tours
+*/
+function toDateTime($date, $time) {
+    return date("Y-m-d H:i:s", strtotime($date . " ". $time));
+}
+
+function getGuideData($link, $tguide) {
+    $sql = "SELECT * FROM guide WHERE Name= ?";
+
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../tours.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "s", $tguide);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+
+    return mysqli_fetch_array($result);
+}
+
+function getTourSpots($link, $guide_id, $date, $time) {
+    $sql = "SELECT SpotsLeft FROM tour WHERE GuideID= ? AND DateTime= ?";
+
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../tours.php?error=stmtfailed");
+        exit();
+    }
+
+    $datetime = toDateTime($date, $time);
+    mysqli_stmt_bind_param($stmt, "ss", $guide_id, $datetime);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+    
+    $row = mysqli_fetch_array($result);
+    return $row['SpotsLeft'];
+}
+
+function updateTourSpots($link, $guide_id, $date, $time, $newSpots) {
+    $sql = "UPDATE tour SET SpotsLeft= ? WHERE GuideID= ? AND DateTime= ?";
+
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../tours.php?error=stmtfailed");
+        exit();
+    }
+
+    $datetime = toDateTime($date, $time);
+    mysqli_stmt_bind_param($stmt, "sss", $newSpots, $guide_id, $datetime);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    return true;
+}
+
+function isRepeatBooking($link, $guide_id, $date, $time, $visitor_id) {
+    $sql = "SELECT TourDateTime FROM tourvisitor WHERE TourGuideID= ? AND TourDateTime= ? AND VisitorID= ?";
+
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../tours.php?error=stmtfailed");
+        exit();
+    }
+
+    $datetime = toDateTime($date, $time);
+    mysqli_stmt_bind_param($stmt, "sss", $guide_id, $datetime, $visitor_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+
+    $row = mysqli_fetch_array($result);
+    return $row !== null;
+}
+
+function bookTour($link, $guide_id, $date, $time, $visitor_id, $partySize) {
+    # Prepare transaction
+    mysqli_autocommit($link, false);
+
+    # Prepare insert statement of tour into tourvisitor which holds all booked tours
+    $sql = "INSERT INTO tourvisitor (TourGuideID, TourDateTime, VisitorID) VALUES (?, ?, ?)";
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../tours.php?error=stmtfailed");
+        exit();
+    }
+    $datetime = toDateTime($date, $time);
+    mysqli_stmt_bind_param($stmt, "sss", $guide_id, $datetime, $visitor_id);
+
+    # Rollback transaction when not enough spots for the party size booking or repeat booking by user
+    $availableSpots = getTourSpots($link, $guide_id, $date, $time);
+
+    if ($availableSpots < $partySize) {
+        mysqli_rollback($link);
+        return false;
+    } else if (isRepeatBooking($link, $guide_id, $date, $time, $visitor_id)) {
+        mysqli_rollback($link);
+        return false;
+    } else {
+        # Execute insert of booked tour into tourvisitor
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+
+        # Update tour spots
+        updateTourSpots($link, $guide_id, $date, $time, $availableSpots - $partySize);
+        mysqli_commit($link);
+        return true;
+    }
+}
+
+function deleteBookedTour($link, $guide_id, $date, $time, $visitor_id, $partySize) {
+    # Prepare delete statement of tour into tourvisitor which holds all booked tours
+    $sql = "DELETE FROM tourvisitor WHERE TourGuideID= ? AND TourDateTime= ? AND VisitorID = ?";
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../tours.php?error=stmtfailed");
+        exit();
+    }
+
+    $datetime = toDateTime($date, $time);
+    mysqli_stmt_bind_param($stmt, "sss", $guide_id, $datetime, $visitor_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    
+    # Update spots left in the tour
+    $availableSpots = getTourSpots($link, $guide_id, $date, $time);
+    updateTourSpots($link, $guide_id, $date, $time, $availableSpots + $partySize);
+    return true;
+}
+
+
+/*
     Functions related to search for available tours
 */
 
@@ -75,7 +210,7 @@ function isSpecified($field) {
 
 # Generic search template
 function tourSearchQuery ($link, $guide, $month, $day, $year) {
-    $sql  = "SELECT G.Name, Date(T.DateTime) AS TourDate, Time(T.DateTime) AS TourTime, T.VisitorCount ";
+    $sql  = "SELECT G.Name, Date(T.DateTime) AS TourDate, Time(T.DateTime) AS TourTime, T.SpotsLeft ";
     $sql .= "FROM tour AS T ";
     $sql .= "INNER JOIN guide AS G ";
     $sql .= "ON T.GuideID = G.ID ";
@@ -99,7 +234,7 @@ function tourSearchQuery ($link, $guide, $month, $day, $year) {
     
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../tours.php?error=stmtfailed");
+        header("location: ../tours.php?error=searchfailed");
         exit();
     }
 

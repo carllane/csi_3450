@@ -12,12 +12,12 @@ if (isset($_REQUEST['btguide']) && isset($_REQUEST['btdate']) && isset($_REQUEST
     if (isset($_SESSION['visitor-logged-in'])) {
         $visitor_id = $_SESSION['visitor-logged-in'];
 
-        # Insert visitor - tour relationship into database
+        # Remove visitor - tour relationship into database
         $guide_id = getGuideData($link, $tguide)['ID'];
-        $success = bookTour($link, $guide_id, $tdate, $ttime, $visitor_id, $partySize);
+        $success = deleteBookedTour($link, $guide_id, $tdate, $ttime, $visitor_id, $partySize);
 
         if (!$success) {
-            header("location: ../tours.php?error=bad_booking");
+            header("location: ../tours.php?error=bad_delete");
             exit();
         } else {
             header("location: tours-refresh-inc.php?refresh=true");
