@@ -211,6 +211,15 @@ function deleteBookedTour($link, $guide_id, $date, $time, $visitor_id, $partySiz
         exit();
     }
 
+ function deleteToursAdmin($link, $guide_id, $date, $time, $visitor_id, $partySize) {
+        # Prepare delete statement of tours in admin role
+        $sql = "DELETE FROM tourvisitor WHERE TourGuideID= ? AND TourDateTime= ? AND VisitorID = ?";
+        $stmt = mysqli_stmt_init($link);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            header("location: ../tours.php?error=stmtfailed");
+            exit();
+        }
+    }
     $datetime = toDateTime($date, $time);
     mysqli_stmt_bind_param($stmt, "sss", $guide_id, $datetime, $visitor_id);
     mysqli_stmt_execute($stmt);
