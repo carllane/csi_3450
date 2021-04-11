@@ -23,8 +23,8 @@
    
     <?php
      session_start();
-        if (isset($_SESSION['visitor-logged-in'])) {
-            $sql = "SELECT Name FROM visitor WHERE ID=" .$_SESSION['visitor-logged-in'];
+        if (isset($_SESSION['employee-logged-in'])) {
+            $sql = "SELECT Name FROM employee WHERE ID=" .$_SESSION['employee-logged-in'];
             $result = mysqli_query($link, $sql) or die(mysqli_error($link));
             $row = mysqli_fetch_array($result);
             echo "<p style='text-align:center'>Logged in as " . $row['Name']."</p>";
@@ -34,7 +34,7 @@
 
 
        
-        if (!isset($_SESSION['visitor-logged-in'])) {
+        if (!isset($_SESSION['employee-logged-in'])) {
             echo '<a class="button-link" href="employee_login.php" style="position: fixed; top:50px; right:30px">Log In</a>';
         } else {
             echo '<a class="button-link" href="includes/logout-inc.php" style="position: fixed; top:50px; right:25px">Log Out</a>';
