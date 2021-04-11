@@ -13,15 +13,24 @@ if (isset($_POST['submit'])) {
     $results = tourSearchQuery($link, $guide, $month, $day, $year);
     $content = "";
 
+    session_start();
+
     # Append Search Query Results to a content string
     if ($results !== false && mysqli_num_rows($results) > 0) {
         $content .= "<table style='margin-left:20px;width:60%' class='search-table'>";
-        $content .= "<tr><th>Guide</td><th>Tour Date</th><th>Tour Time</th><th>Spots Left</th><th></th></tr>";
+        $content .= "<tr><th>Guide</td><th>Tour Date</th><th>Tour Time</th><th>Spots Left</th><th></th>";
+        if (isset($_SESSION['employee-logged-in'])) { $content .= "<th></th>";}
+        $content .= "</tr>";
         while($row = mysqli_fetch_array($results)) {
             if ($row['SpotsLeft'] == 0) { continue; }
             $content .= "<tr><td>" . $row['Name'] . "</td><td>" . $row['TourDate']  . "</td><td>" . $row['TourTime'] ."</td><td>" . $row['SpotsLeft'] . "</td>";
             $content .= "<td><div><a class='button-link' style='margin: -5px -20px;border:none;padding: 10px 40px;' href='includes/tours-book-inc.php?btguide=".$row['Name']."&btdate="
-                .$row['TourDate']."&bttime=".$row['TourTime']."'>Book</a></div></td></tr>";
+                .$row['TourDate']."&bttime=".$row['TourTime']."'>Book</a></div></td>";
+            if (isset($_SESSION['employee-logged-in'])) {
+                $content .= "<td><div><a class='submit' style='margin: -5px -20px;border:none;padding: 10px 40px;' href='includes/tours-delete-admin-inc.php?btguide=".$row['Name']."&btdate="
+                    .$row['TourDate']."&bttime=".$row['TourTime']."'>Delete</a></div></td>";
+            }   
+            $content .= "</tr>";
         }
         $content .= "</table>";
     } else {
@@ -29,11 +38,10 @@ if (isset($_POST['submit'])) {
     }
 
     # Debug statements
-    echo $guide . ", " . $month . ", " . $day . ", " . $year . "<br>";
-    echo $content;
+    // echo $guide . ", " . $month . ", " . $day . ", " . $year . "<br>";
+    // echo $content;
 
     # Pass content string to session
-    session_start();
     $_SESSION["search-content"] = $content;
     $_SESSION["tguide"] = $guide;
     $_SESSION["tmonth"] = $month;

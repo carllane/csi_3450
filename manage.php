@@ -25,21 +25,10 @@
 </div>
 <div class="main"> 
     <?php
-        
-       
         if (!isset($_SESSION['employee-logged-in'])) {
             echo '<a class="button-link" href="employee_login.php" style="position: fixed; top:50px; right:30px">Log In</a>';
         } else {
             echo '<a class="button-link" href="includes/logout-inc.php" style="position: fixed; top:50px; right:25px">Log Out</a>';
-        }
-        # Existing search query content
-        if (isset($_SESSION["search-content"])) {
-            $content = $_SESSION["search-content"];
-            if ($content !== false) {
-                echo $content;
-            } else {
-                echo "<h4>No tours found</h4>";
-            }
         }
     ?>
 </div> 
