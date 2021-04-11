@@ -29,11 +29,11 @@ function verifyVisitorLogin($link,$email, $pass) {
 }
 
 function verifyEmployeeLogin($link,$email, $pass) {
-    $sql = "SELECT ID FROM visitor WHERE Email = ? AND Password = ?";
+    $sql = "SELECT ID FROM employee WHERE Email = ? AND Password = ?";
 
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../login.php?error=stmtfailed");
+        header("location: ../employee-login.php?error=stmtfailed");
         exit();
     }
 
