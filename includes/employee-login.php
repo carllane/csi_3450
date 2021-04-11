@@ -12,12 +12,12 @@ if (isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['pass'])) 
         exit();
     }
 
-    $visitorId = verifyVisitorLogin($link, $email, $pass);
-    if ($visitorId === -1) {
+    $employeeId = verifyemployeeLogin($link, $email, $pass);
+    if ($employeeId === -1) {
         header("location: ../login.php?error=wrongpass");
         exit();
     } else {
-        $_SESSION['visitor-logged-in'] = $visitorId;
+        $_SESSION['employee-logged-in'] = $employeeId;
     }
 
     header("location: ../manage.php");

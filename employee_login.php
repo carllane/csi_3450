@@ -31,7 +31,7 @@ session_start();
 <div class="main">
     <section>
         <h2>Log in!</h2>
-        <form action="includes/loginemployee-inc.php" method="POST" class="form">
+        <form action="includes/employee-login.php" method="POST" class="form">
             <label for="email">Email</label><br>
             <input type="email" name="email" id="email"></input><br>
             <label for="pass">Password</label><br>
