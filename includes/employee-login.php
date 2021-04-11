@@ -20,10 +20,10 @@ if (isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['pass'])) 
         $_SESSION['employee-logged-in'] = $employeeId;
     }
 
-    header("location: ../manage.php");
+    header("location: ../artwork.php");
     exit();
 } else {
-    header("location: ../manage.php");
+    header("location: ../artwork.php");
     exit();
 }
 
