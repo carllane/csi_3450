@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `employee` (
-  `ID` smallint(5) UNSIGNED NOT NULL,
+  `ID` smallint(1) UNSIGNED NOT NULL,
   `Name` varchar(60) DEFAULT NULL,
   `Email` varchar(60) NOT NULL,
   `Password` varchar(60) NOT NULL,
@@ -40,8 +40,8 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`ID`, `Name`, `Email`, `Password`, `PhoneNum`) VALUES
-(1, 'Jess', 'employee@artgallery.com', 'password', '586-248-1330'),
-(2, 'Steve', 'employee79233@artgallery.com', 'password', '906-123-1234'),
+(1, 'Jess', 'employee@artgallery.com', 'password', '245-212-2312'),
+(2, 'Steve', 'employee79233@artgallery.com', 'password', '232-232-2123');
 
 
 --
