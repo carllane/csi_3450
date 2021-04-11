@@ -15,7 +15,6 @@
 </div>
 <div class="main"> 
     <?php
-     session_start();
         if (isset($_SESSION['employee-logged-in'])) {
             $sql = "SELECT Name FROM employee WHERE ID=" .$_SESSION['employee-logged-in'];
             $result = mysqli_query($link, $sql) or die(mysqli_error($link));
