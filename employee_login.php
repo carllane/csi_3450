@@ -4,7 +4,7 @@ include_once 'includes/header.php';
 session_start();
 ?>
 <div class="header">
-    <h1>Art Gallery Tours</h1>
+    <h1>Employee login</h1>
    
     <?php 
         if(isset($_GET['error'])) {
