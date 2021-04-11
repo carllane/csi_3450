@@ -28,6 +28,30 @@ function verifyVisitorLogin($link,$email, $pass) {
     return $visitorId;
 }
 
+function verifyEmployeeLogin($link,$email, $pass) {
+    $sql = "SELECT ID FROM visitor WHERE Email = ? AND Password = ?";
+
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../login.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $email, $pass);
+    mysqli_stmt_execute($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+
+    $visitorId = -1;
+
+    if ($resultData !== false && mysqli_num_rows($resultData) > 0) {
+        $row = mysqli_fetch_array($resultData);
+        $visitorId = $row['ID'];
+    }
+
+    return $visitorId;
+}
+
 function anyEmptyFields($name, $email, $pass, $phone) {
     return empty($name) || empty($email) || empty($pass) || empty($phone);
 }

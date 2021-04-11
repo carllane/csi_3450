@@ -12,7 +12,7 @@ if (isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['pass'])) 
         exit();
     }
 
-    $employeeId = verifyemployeeLogin($link, $email, $pass);
+    $employeeId = verifyEmployeeLogin($link, $email, $pass);
     if ($employeeId === -1) {
         header("location: ../login.php?error=wrongpass");
         exit();
