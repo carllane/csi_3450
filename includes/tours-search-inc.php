@@ -39,6 +39,7 @@ if (isset($_POST['submit'])) {
     $_SESSION["tmonth"] = $month;
     $_SESSION["tday"] = $day;
     $_SESSION["tyear"] = $year;
+    $_SESSION["show-content"] = true;
 
     # Redirect page back to tours
     header("location: ../tours.php");
