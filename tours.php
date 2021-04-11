@@ -190,10 +190,11 @@ session_start();
                 echo '<a class="button-link" href="includes/logout-inc.php" style="position: fixed; top:50px; right:25px">Log Out</a>';
             }
             # Existing search query content
-            if (isset($_SESSION["search-content"])) {
+            if (isset($_SESSION["search-content"]) && isset($_SESSION["show-content"]) && $_SESSION["show-content"]) {
                 $content = $_SESSION["search-content"];
                 if ($content !== false) {
                     echo $content;
+                    $_SESSION["show-content"] = false;
                 } else {
                     echo "<h4>No tours found</h4>";
                 }
