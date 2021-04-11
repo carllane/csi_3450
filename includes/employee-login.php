@@ -8,13 +8,13 @@ if (isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['pass'])) 
     $pass = $_POST['pass'];
 
     if (anyEmptyFields("N/A", $email, $pass, "N/A")) {
-        header("location: ../login.php?error=empty");
+        header("location: ../employee_login.php?error=empty");
         exit();
     }
 
     $employeeId = verifyEmployeeLogin($link, $email, $pass);
     if ($employeeId === -1) {
-        header("location: ../login.php?error=wrongpass");
+        header("location: ../employee_login.php?error=wrongpass");
         exit();
     } else {
         $_SESSION['employee-logged-in'] = $employeeId;
