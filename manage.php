@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Art Gallery</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="header">
-        <h1>Manage Artwork</h1>
-    </div>
-    <div class="sidenav">
-        <a href="artwork.php">Artwork</a>
-        <a href="tours.php">Tours</a>
-        <a href="index.php">About Us</a>
-        <br>
-        <a class="active" href="manage.php">Manage</a>
-    </div>
-    <div class="main">
-
-
-    <div class="header">
+<?php 
+    require_once 'connect.php';
+    include_once 'includes/header.php';
+    session_start();
+?>
+<div class="header">
     <h1>Employee Login</h1>
-   
+</div>
+<div class="sidenav">
+    <a href="artwork.php">Artwork</a>
+    <a href="tours.php">Tours</a>
+    <a href="index.php">About Us</a>
+    <br>
+    <a class="active" href="manage.php">Manage</a>
+</div>
+<div class="main"> 
     <?php
      session_start();
         if (isset($_SESSION['employee-logged-in'])) {
@@ -31,8 +24,6 @@
         } else {
             echo "<p style='text-align:center;color:#fa2742'><strong>Not Logged In!</strong></p>";
         }
-
-
        
         if (!isset($_SESSION['employee-logged-in'])) {
             echo '<a class="button-link" href="employee_login.php" style="position: fixed; top:50px; right:30px">Log In</a>';
@@ -49,25 +40,5 @@
             }
         }
     ?>
-</section>
 </div> 
 <?php include_once 'includes/footer.php'; ?>
-
-
-</div>
-<div cla
-     
-
-
-
-<?php
-//require_once 'connect.php';
-//$sql = "SELECT * FROM guide";
-//$result = mysqli_query($link, $sql) or die(mysqli_error($link));
-
-//echo "<h2>Test</h2><br>";
-//while($row = mysqli_fetch_array($result)) {
- //   echo "Guide name " . $row['Name'] . "<br>";
-//}
-
-
