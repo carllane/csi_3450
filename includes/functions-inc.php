@@ -42,14 +42,14 @@ function verifyEmployeeLogin($link,$email, $pass) {
     $resultData = mysqli_stmt_get_result($stmt);
     mysqli_stmt_close($stmt);
 
-    $visitorId = -1;
+    $employeeId = -1;
 
     if ($resultData !== false && mysqli_num_rows($resultData) > 0) {
         $row = mysqli_fetch_array($resultData);
-        $visitorId = $row['ID'];
+        $employeeId = $row['ID'];
     }
 
-    return $visitorId;
+    return $employeeId;
 }
 
 function anyEmptyFields($name, $email, $pass, $phone) {
