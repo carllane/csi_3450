@@ -23,13 +23,6 @@ if (isset($_REQUEST['btguide']) && isset($_REQUEST['btdate']) && isset($_REQUEST
             header("location: tours-refresh-inc.php?refresh=true");
             exit();
         }
-    } else {
-        # Direct visitor to log in
-        header("location: ../login.php");
-        exit();
-    }
-} else {
-    # Page accessed without clicking on a 'book tour' link
-    header("location: ../tours.php");
-    exit();
+    } 
+} 
 }
