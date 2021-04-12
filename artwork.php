@@ -20,20 +20,23 @@ session_start();
             <label for = "tartwork" >Artwork Name</label>
             <select class = "dropdown" id= "tartwork" name= "tartwork">
                 <?php
-                    if(isset($_SESSION["tartwork"])){
-                        $tartwork = $_SESSION["tartwork"];
-                        $tartwork_display = ($tartwork == '*') ? 'Any': $tartwork;
-                        echo "<option value='" . $tartwork . "'selected>" . $tartwork_display . "</option>";
+                    $selected = "";
+                    if(isset($_SESSION["tartwork"]) AND $_SESSION["tartwork"] == "*"){
+                        $selected = "selected";
                     }
                 ?>
-                <option value= '*'>Any</option>
+                <option value= '*' <?php echo $selected; ?>>Any</option>
 
                 <?php
                     $sql = "SELECT * FROM artwork";
                     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
                 
                     while($row = mysqli_fetch_array($result)){
-                        echo "<option value='" .$row['Name']."'>".$row['Name']."</option>";
+                        $selected = "";
+                        if(isset($_SESSION["tartwork"]) AND $_SESSION["tartwork"] == $row['Name']){
+                            $selected = "selected";
+                        }
+                        echo "<option value='" .$row['Name']."' ".$selected.">".$row['Name']."</option>";
                     }
             ?>
         </select>
@@ -41,20 +44,23 @@ session_start();
         <label style= "margin-left: 3%;" for="tartist">Artist</label>
         <select class = "dropdown" id = "tartist" name= "tartist">
                 <?php
-                    if(isset($_SESSION["tartist"])){
-                        $tartist = $_SESSION["tartist"];
-                        $tartist_display = ($tartist == '*') ? 'Any': $tartist;
-                        echo "<option value='" . $tartist . "'selected>" . $tartist_display . "</option>";
+                    $selected = "";
+                    if(isset($_SESSION["tartist"]) AND $_SESSION["tartist"] == "*"){
+                        $selected = "selected";
                     }
                 ?>
-                <option value= '*'>Any</option>
+                <option value= '*'<?php echo $selected; ?>>Any</option>
 
                 <?php
-                    $sql = "SELECT * FROM artwork";
+                    $sql = "SELECT DISTINCT Artist FROM artwork";
                     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
                 
                     while($row = mysqli_fetch_array($result)){
-                        echo "<option value='" .$row['Artist']."'>".$row['Artist']."</option>";
+                        $selected = "";
+                        if(isset($_SESSION["tartist"]) AND $_SESSION["tartist"] == $row['Artist']){
+                            $selected = "selected";
+                        }
+                        echo "<option value='" .$row['Artist']."' ".$selected.">".$row['Artist']."</option>";
                     }
                 ?>
             </select>
@@ -62,19 +68,22 @@ session_start();
             <label style= "margin-left: 3%;" for="tType">Type</label>
             <select class = "dropdown" id = "tType" name= "tType">
                 <?php
-                    if(isset($_SESSION["tType"])){
-                        $tType = $_SESSION["tType"];
-                        $tType_display = ($tType == '*') ? 'Any': $tType;
-                        echo "<option value='" . $tType . "'selected>" . $tType_display . "</option>";
+                    $selected = "";
+                    if(isset($_SESSION["tType"]) AND $_SESSION["tType"] == "*"){
+                        $selected = "selected";
                     }
                 ?>
-                <option value= '*'>Any</option>
+                <option value= '*'<?php echo $selected; ?>>Any</option>
 
                 <?php
-                    $sql = "SELECT * FROM artwork";
+                    $sql = "SELECT DISTINCT Type FROM artwork";
                     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
                 
                     while($row = mysqli_fetch_array($result)){
+                        $selected = "";
+                        if(isset($_SESSION["tType"]) AND $_SESSION["tType"] == $row['Type']){
+                            $selected = "selected";
+                        }
                         echo "<option value='" .$row['Type']."'>".$row['Type']."</option>";
                     }
                 ?>
@@ -83,19 +92,22 @@ session_start();
             <label style= "margin-left: 3%;" for="tmovement">Movement</label>
             <select class = "dropdown" id = "tmovement" name= "tmovement">
                 <?php
-                    if(isset($_SESSION["tmovement"])){
-                        $tmovement = $_SESSION["tmovement"];
-                        $tmovement_display = ($tmovement == '*') ? 'Any': $tmovement;
-                        echo "<option value='" . $tmovement . "'selected>" . $tmovement_display . "</option>";
+                    $selected = "";
+                    if(isset($_SESSION["tmovement"]) AND $_SESSION["tmovement"] == "*"){
+                        $selected = "selected";
                     }
                 ?>
-                <option value= '*'>Any</option>
+                <option value= '*'<?php echo $selected; ?>>Any</option>
 
                 <?php
-                    $sql = "SELECT * FROM artwork";
+                    $sql = "SELECT DISTINCT MovementName FROM artwork";
                     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
                 
                     while($row = mysqli_fetch_array($result)){
+                        $selected = "";
+                        if(isset($_SESSION["tmovement"]) AND $_SESSION["tmovement"] == $row['MovementName']){
+                            $selected = "selected";
+                        }
                         echo "<option value='" .$row['MovementName']."'>".$row['MovementName']."</option>";
                     }
                 ?>
