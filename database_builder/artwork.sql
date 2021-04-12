@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2021 at 03:57 AM
+-- Generation Time: Apr 12, 2021 at 04:05 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -48,7 +48,7 @@ INSERT INTO `artwork` (`ArtworkID`, `Image`, `Name`, `Artist`, `YearMade`, `Move
 (3, 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/400px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg', 'The Birth of Venus', 'Sandro Botticelli', 1485, 'Renaissance', '$500 million', 'Painting'),
 (4, 'https://upload.wikimedia.org/wikipedia/en/thumb/7/74/PicassoGuernica.jpg/350px-PicassoGuernica.jpg', 'Guernica', 'Pablo Picasso', 1937, 'Cubism', '$200 million', 'Painting'),
 (5, 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Michelangelo%27s_David_2015.jpg/250px-Michelangelo%27s_David_2015.jpg', 'David of Michelangelo', 'Michelangelo', 1504, 'Renaissance', '$65 million', 'Sculpture'),
-(6, 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Da_Vinci_Vitruve_Luc_Viatour.jpg/300px-Da_Vinci_Vitruve_Luc_Viatour.jpg', 'Vitruvian Man', 'Leonardo da Vinci', 1490, 'Renaissance', '$16 million', 'Drawing'),
+(6, 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Da_Vinci_Vitruve_Luc_Viatour.jpg/300px-Da_Vinci_Vitruve_Luc_Viatour.jpg', 'Vitruvian Man', 'Leonardo de Vinci', 1490, 'Renaissance', '$16 million', 'Drawing'),
 (7, 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Marcel_Duchamp%2C_1917%2C_Fountain%2C_photograph_by_Alfred_Stieglitz.jpg/220px-Marcel_Duchamp%2C_1917%2C_Fountain%2C_photograph_by_Alfred_Stieglitz.jpg', 'Fountain', 'Marcel Duchamp', 1917, 'Fauvism', '$2 million', 'Sculpture'),
 (8, 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tsunami_by_hokusai_19th_century.jpg/350px-Tsunami_by_hokusai_19th_century.jpg', 'The Great Wave off Kanagawa', 'Hokusai', 1831, 'Romanticism', '$77,500', 'Print'),
 (9, 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Michelangelo%27s_Pieta_5450_cut_out_black.jpg/275px-Michelangelo%27s_Pieta_5450_cut_out_black.jpg', 'The Pietà', 'Michelangelo', 1499, 'Renaissance', '$300 million', 'Sculpture'),
