@@ -232,7 +232,21 @@ function insertNewTour($link, $tguideid, $datetime, $spotsleft) {
     }
 
     mysqli_stmt_bind_param($stmt, "sss", $tguideid, $datetime, $spotsleft);
-    echo $stmt . "<br>" . $sql;
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
+function insertNewArtwork($link, $imageurl, $artwork_name, $artist, $year_made, $movement_name, $price, $type) {
+    $sql = "INSERT INTO `artwork`(`Image`, `Name`, `Artist`, `YearMade`, `MovementName`, `Price`, `Type`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../manage.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sssssss", $imageurl, $artwork_name, $artist, $year_made, $movement_name, $price, $type);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
@@ -256,7 +270,7 @@ function deleteToursAdmin($link, $guide_id, $date, $time) {
 
 function deleteArtworkAdmin($link, $artworkName, $artist, $type, $movement) {
     # Prepare delete statement of tours in admin role
-    $sql = "DELETE FROM artwork WHERE Name= ?";
+    $sql = "DELETE FROM artwork WHERE ArtworkID= ?";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../artwork.php?error=stmtfailed");
