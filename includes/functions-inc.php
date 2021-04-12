@@ -222,6 +222,22 @@ function deleteBookedTour($link, $guide_id, $date, $time, $visitor_id, $partySiz
     return true;
 }
 
+function insertNewTour($link, $tguideid, $datetime, $spotsleft) {
+    $sql = "INSERT INTO tour (GuideID, DateTime, SpotsLeft) VALUES (?, ?, ?)";
+    
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../manage.php?error=stmtfailed");
+        exit();
+    }
+    $datetime = '2025-01-02 22:00:00';
+    mysqli_stmt_bind_param($stmt, "isi", $tguideid, $datetime, $spotsleft);
+    echo $stmt;
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
 function deleteToursAdmin($link, $guide_id, $date, $time) {
     # Prepare delete statement of tours in admin role
     $sql = "DELETE FROM tour WHERE GuideID= ? AND DateTime= ?";
@@ -246,6 +262,7 @@ function deleteArtworkAdmin($link, $artworkName, $artist, $type, $movement) {
         header("location: ../artwork.php?error=stmtfailed");
         exit();
     }
+}
 
 /*
     Functions related to search for available tours
@@ -468,5 +485,4 @@ function anyInput($stmt, $artworkName, $artist, $type, $movement) {
     } else {
         # *, *, *, * no binding required
     }
-}
 }

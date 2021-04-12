@@ -15,14 +15,6 @@ if (isset($_REQUEST['tartwork']) && isset($_REQUEST['tartist']) && isset($_REQUE
         # Remove visitor - tour relationship into database
         //$guide_id = getArtworkData($link, $tguide)['ID'];
         $success = deleteArtworkPaint($link, $artworkName, $artist, $type, $movement);
-
-        if (!$success) {
-            header("location: ../artwork.php?error=bad_delete");
-            exit();
-        } else {
-            header("location: tours-refresh-inc.php?refresh=true");
-            exit();
-        }
     } else {
         # Direct visitor to log in
         header("location: ../login.php");
