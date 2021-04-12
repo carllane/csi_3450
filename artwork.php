@@ -30,7 +30,7 @@ session_start();
 
                 <?php
                     $sql = "SELECT * FROM artwork";
-                    $result = mysqli_query($link, $sql) or die(mysqi_error($link));
+                    $result = mysqli_query($link, $sql) or die(mysqli_error($link));
                 
                     while($row = mysqli_fetch_array($result)){
                         echo "<option value='" .$row['Name']."'>".$row['Name']."</option>";
@@ -44,7 +44,7 @@ session_start();
                     if(isset($_SESSION["tartist"])){
                         $tartist = $_SESSION["tartist"];
                         $tartist_display = ($tartist == '*') ? 'Any': $tartist;
-                        echo "<option value='" . $tartist . "'selected>" . $tartkist_display . "</option>";
+                        echo "<option value='" . $tartist . "'selected>" . $tartist_display . "</option>";
                     }
                 ?>
                 <option value= '*'>Any</option>
@@ -63,7 +63,7 @@ session_start();
             <select class = "dropdown" id = "tType" name= "tType">
                 <?php
                     if(isset($_SESSION["tType"])){
-                        $tTypet = $_SESSION["tType"];
+                        $tType = $_SESSION["tType"];
                         $tType_display = ($tType == '*') ? 'Any': $tType;
                         echo "<option value='" . $tType . "'selected>" . $tType_display . "</option>";
                     }
