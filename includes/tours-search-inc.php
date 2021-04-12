@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     if ($results !== false && mysqli_num_rows($results) > 0) {
         $content .= "<table style='margin-left:20px;width:60%' class='search-table'>";
         $content .= "<tr><th>Guide</td><th>Tour Date</th><th>Tour Time</th><th>Spots Left</th><th></th>";
-        if (isset($_SESSION['employee-logged-in'])) { $content .= "<th></th>";}
+        if (isset($_SESSION['employee-logged-in'])) { $content .= "<th>Admin Delete</th>";}
         $content .= "</tr>";
         while($row = mysqli_fetch_array($results)) {
             if ($row['SpotsLeft'] == 0) { continue; }
