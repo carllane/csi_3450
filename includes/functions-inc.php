@@ -238,6 +238,15 @@ function deleteToursAdmin($link, $guide_id, $date, $time) {
     return true;
 }
 
+function deleteArtworkAdmin($link, $artworkName, $artist, $type, $movement) {
+    # Prepare delete statement of tours in admin role
+    $sql = "DELETE FROM artwork WHERE Name= ?";
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../artwork.php?error=stmtfailed");
+        exit();
+    }
+
 /*
     Functions related to search for available tours
 */
