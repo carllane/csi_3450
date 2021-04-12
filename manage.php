@@ -32,8 +32,6 @@
         
             include_once 'includes/add-artwork.php';
             include_once 'includes/add-tour.php';
-            // echo '<a class="button-link" href="includes/add-artwork.php">Add Artwork</a><br>';
-            // echo '<a class="button-link" href="includes/add-tour.php">Add Tour</a>';
         }
     ?>
 </div> 
