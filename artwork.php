@@ -51,7 +51,7 @@ session_start();
 
                 <?php
                     $sql = "SELECT * FROM artwork";
-                    $result = mysqli_query($link, $sql) or die(mysqi_error($link));
+                    $result = mysqli_query($link, $sql) or die(mysqli_error($link));
                 
                     while($row = mysqli_fetch_array($result)){
                         echo "<option value='" .$row['Artist']."'>".$row['Artist']."</option>";
@@ -72,7 +72,7 @@ session_start();
 
                 <?php
                     $sql = "SELECT * FROM artwork";
-                    $result = mysqli_query($link, $sql) or die(mysqi_error($link));
+                    $result = mysqli_query($link, $sql) or die(mysqli_error($link));
                 
                     while($row = mysqli_fetch_array($result)){
                         echo "<option value='" .$row['Type']."'>".$row['Type']."</option>";
@@ -93,7 +93,7 @@ session_start();
 
                 <?php
                     $sql = "SELECT * FROM artwork";
-                    $result = mysqli_query($link, $sql) or die(mysqi_error($link));
+                    $result = mysqli_query($link, $sql) or die(mysqli_error($link));
                 
                     while($row = mysqli_fetch_array($result)){
                         echo "<option value='" .$row['MovementName']."'>".$row['MovementName']."</option>";

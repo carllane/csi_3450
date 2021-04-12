@@ -11,11 +11,19 @@ if(isset($_POST['submit'])){
     $results = artworkSearchQuery($link, $artworkName, $artist, $type, $movement);
     $content = "";
 
+    session_start();
+
     if($results !== false && mysqli_num_rows($results) > 0){
-        $content .= "<table style = 'margin-left: 20px; width: 60%' class = 'search-table'>";
-        $content .= "<tr><th>Image</td><th>Name</th><th>Artist</th><th>Year</th><th>Price</th><th>Type</th><th>Movement</th></tr>";
+        $content .= "<table style = 'margin: auto; width: 90%' class = 'search-table'>";
+        $content .= "<tr><th>Image</td><th>Name</th><th>Artist</th><th>Year</th><th>Price</th><th>Type</th><th>Movement</th>";
+        if (isset($_SESSION['employee-logged-in'])) { $content .= "<th>Admin Delete</th>"; }
+        $content .= "</tr>";
         while($row = mysqli_fetch_array($results)){
-           $content .= "<tr><td>" .$row['Image'] . "</td><td>" . $row['Name'] . "</td><td>" . $row['Artist'] . "</td><td>" . $row['YearMade'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['MovementName'] . "</td>"; 
+            $content .= "<tr><td><img src='" .$row['Image'] . "'></td><td>" . $row['Name'] . "</td><td>" . $row['Artist'] . "</td><td>" . $row['YearMade'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['Type'] . "</td><td>" . $row['MovementName'] . "</td>"; 
+            if (isset($_SESSION['employee-logged-in'])) {
+                $content .= "<td><div><a class='submit' style='border:none;padding: 10px 40px;' href='includes/artwork-delete-admin-inc.php?artworkid=".$row['ArtworkID']."'>Delete</a></div></td>";
+            }
+            $content .= "</tr>";
         }
         $content .= "</table>";
     }else{
@@ -26,7 +34,6 @@ if(isset($_POST['submit'])){
     echo $artworkName . "," . $artist . "," . $type . "," . $type . "," . $movement . "<br>";
     echo $content;
 
-    session_start();
     $_SESSION["Art-content"] = $content;
     $_SESSION["tartwork"] = $artworkName;
     $_SESSION["tartist"] = $artist;

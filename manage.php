@@ -29,6 +29,9 @@
             echo '<a class="button-link" href="employee_login.php" style="position: fixed; top:50px; right:30px">Log In</a>';
         } else {
             echo '<a class="button-link" href="includes/logout-inc.php" style="position: fixed; top:50px; right:25px">Log Out</a>';
+        
+            include_once 'includes/add-artwork.php';
+            include_once 'includes/add-tour.php';
         }
     ?>
 </div> 
