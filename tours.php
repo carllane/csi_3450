@@ -66,20 +66,23 @@ session_start();
             <label for="tguide">Guide</label>
             <select class="dropdown" id="tguide" name="tguide">
                 <?php 
-                    if(isset($_SESSION["tguide"])) {
-                        $tguide = $_SESSION["tguide"];
-                        $tguide_display = ($tguide == '*') ? 'Any' : $tguide;
-                        echo "<option value='" . $tguide . "' selected>" . $tguide_display . "</option>";
+                    $selected = "";
+                    if(isset($_SESSION["tguide"]) AND $_SESSION["tguide"] == "*"){
+                        $selected = "selected";
                     }
                 ?>
-                <option value='*'>Any</option>
+                <option value='*'<?php echo $selected; ?>>Any</option>
 
                 <?php 
                     $sql = "SELECT * FROM GUIDE";
                     $result = mysqli_query($link, $sql) or die(mysqli_error($link));
 
                     while($row = mysqli_fetch_array($result)) {
-                        echo "<option value='".$row['Name']."'>".$row['Name']."</option>";
+                        $selected = "";
+                        if(isset($_SESSION["tguide"]) AND $_SESSION["tguide"] == $row['Name']){
+                            $selected = "selected";
+                        }
+                        echo "<option value='".$row['Name']."' ".$selected.">".$row['Name']."</option>";
                     }
                 ?>
             </select>
@@ -87,6 +90,7 @@ session_start();
             <label style="margin-left: 15%;" for="tmonth">Tour Date</label>
             <select class="dropdown" id="tmonth" name="tmonth">
                 <?php 
+                    $selected = "";
                     if(isset($_SESSION["tmonth"])) {
                         $tmonth = $_SESSION["tmonth"];
                         switch ($tmonth) {
@@ -130,10 +134,10 @@ session_start();
                                 $tmonth_display = 'Month';
                                 break;
                         }
-                        echo "<option value='" . $tmonth . "' selected>" . $tmonth_display . "</option>";
+                        echo "<option value='" . $tmonth . "' . $selected >" . $tmonth_display . "</option>";
                     }
                 ?>
-                <option value="*">Month</option>
+                <option value="*"<?php echo $selected; ?>>Month</option>
                 <option value="1">January</option>
                 <option value="2">Febraury</option>
                 <option value="3">March</option>
@@ -147,36 +151,41 @@ session_start();
                 <option value="11">November</option>
                 <option value="12">December</option>
             </select>
+
             <label for="tday"> / </label>
             <select class="dropdown" id="tday" name="tday">
                 <?php 
-                    if(isset($_SESSION["tday"])) {
-                        $tday = $_SESSION["tday"];
-                        $tday_display = ($tday == '*') ? 'Day' : $tday;
-                        echo "<option value='" . $tday . "' selected>" . $tday_display . "</option>";
+                    $selected = "";
+                    if(isset($_SESSION["tday"]) AND $_SESSION["tday"] == "*"){
+                        $selected = "selected";
                     }
                 ?>
-                <option value="*">Day</option>
+                <option value="*"<?php echo $selected; ?>>Day</option>
                 <?php 
                     for ($i = 1; $i <= 31; $i += 1) {
+                        
                         echo "<option value='" . $i . "'>" . $i ."</option>";
                     }
                 ?>
             </select>
             <label for="tyear"> / </label>
             <select class="dropdown" id="tyear" name="tyear">
-                <option value="*">Year</option>
                 <?php 
-                    if(isset($_SESSION["tyear"])) {
-                        $tyear = $_SESSION["tyear"];
-                        $tyear_display = ($tyear == '*') ? 'Year' : $tyear;
-                        echo "<option value='" . $tyear . "' selected>" . $tyear_display . "</option>";
+                    $selected = "";
+                    if(isset($_SESSION["tyear"]) AND $_SESSION["tyear"] == "*"){
+                        $selected = "selected";
                     }
                 ?>
+                <option value= '*' <?php echo $selected; ?>>Year</option>
+
                 <?php 
                     $cur_year = date("Y");
                     for ($i = $cur_year; $i <= $cur_year + 2; $i += 1) {
-                        echo "<option value='" . $i . "'>" . $i ."</option>";
+                        $selected = "";
+                        if(isset($_SESSION["tyear"]) AND $_SESSION["tyear"] == $row['Name']){
+                            $selected = "selected";
+                        }
+                        echo "<option value='" . $i . "' ".$selected.">" . $i ."</option>";
                     }
                 ?>
             </select>
