@@ -230,9 +230,9 @@ function insertNewTour($link, $tguideid, $datetime, $spotsleft) {
         header("location: ../manage.php?error=stmtfailed");
         exit();
     }
-    $datetime = '2025-01-02 22:00:00';
-    mysqli_stmt_bind_param($stmt, "isi", $tguideid, $datetime, $spotsleft);
-    echo $stmt;
+
+    mysqli_stmt_bind_param($stmt, "sss", $tguideid, $datetime, $spotsleft);
+    echo $stmt . "<br>" . $sql;
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
