@@ -37,10 +37,6 @@ if (isset($_POST['submit'])) {
         $content .= "<p style='text-align:center'>No tours met the search criteria.</p>";
     }
 
-    # Debug statements
-    // echo $guide . ", " . $month . ", " . $day . ", " . $year . "<br>";
-    // echo $content;
-
     # Pass content string to session
     $_SESSION["search-content"] = $content;
     $_SESSION["tguide"] = $guide;

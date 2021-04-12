@@ -31,9 +31,6 @@ if(isset($_POST['submit'])){
 
     }
 
-    echo $artworkName . "," . $artist . "," . $type . "," . $type . "," . $movement . "<br>";
-    echo $content;
-
     $_SESSION["Art-content"] = $content;
     $_SESSION["tartwork"] = $artworkName;
     $_SESSION["tartist"] = $artist;
