@@ -354,3 +354,109 @@ function attachPlaceholders($stmt, $guide, $month, $day, $year) {
         # *, *, *, * no binding required
     }
 }
+
+/*
+    Functions related to search for artwork
+*/
+
+function artworkSearchQuery ($link, $artworkName, $artist, $type, $movement) {
+    $sql  = "SELECT * FROM artwork WHERE 1=1 ";
+
+    if (isSpecified($artworkName)) {
+        $sql .= " AND Name = ? ";
+    }
+    if (isSpecified($artist)) {
+        $sql .= " AND Artist = ? ";
+    }
+    if (isSpecified($type)) {
+        $sql .= " AND Type = ? ";
+    }
+    if (isSpecified($movement)) {
+        $sql .= " AND MovementName = ? ";
+    }
+
+    $sql .= "ORDER BY Name";
+    
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../artwork.php?error=searchfailed");
+        exit();
+    }
+
+    anyInput($stmt, $artworkName, $artist, $type, $movement);
+
+    mysqli_stmt_execute($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+
+    return $resultData;
+}
+
+function anyInput($stmt, $artworkName, $artist, $type, $movement) {
+    if (isSpecified($artworkName)) {
+        if (isSpecified($artist)) {
+            if (isSpecified($type)) {
+                if (isSpecified($movement)) {
+                    # AW, A, T, M
+                    mysqli_stmt_bind_param($stmt, "ssss", $artworkName, $artist, $type, $movement);
+                } else {
+                    # AW, A, T, *
+                    mysqli_stmt_bind_param($stmt, "sss", $artworkName, $artist, $type);
+                }
+            } else {
+                if (isSpecified($movement)) {
+                    # AW, A, *, M
+                    mysqli_stmt_bind_param($stmt, "sss", $artworkName, $artist, $movement);
+                } else {
+                    # AW, A, *, *
+                    mysqli_stmt_bind_param($stmt, "ss", $artworkName, $artist);
+                }
+            }
+        } elseif (isSpecified($type)) {
+            if (isSpecified($movement)) {
+                # AW, *, T, M
+                mysqli_stmt_bind_param($stmt, "sss", $artworkName, $type, $movement);
+            } else {
+                # AW, *, T, *
+                mysqli_stmt_bind_param($stmt, "ss", $artworkName, $type);
+            }
+        } elseif (isSpecified($movement)) {
+            # AW, *, *, M
+            mysqli_stmt_bind_param($stmt, "ss", $artworkName, $movement);
+        } else {
+            # AW, *, *, *
+            mysqli_stmt_bind_param($stmt, "s", $artworkName);
+        }
+    } elseif (isSpecified($artist)) {
+        if (isSpecified($type)) {
+            if (isSpecified($movement)) {
+                # *, A, T, M
+                mysqli_stmt_bind_param($stmt, "sss", $artist, $type, $movement);
+            } else {
+                # *, A, T, *
+                mysqli_stmt_bind_param($stmt, "ss", $artist, $type);
+            }
+        } else {
+            if (isSpecified($movement)) {
+                # *, A, *, M
+                mysqli_stmt_bind_param($stmt, "ss", $artist, $movement);
+            } else {
+                # *, A, *, *
+                mysqli_stmt_bind_param($stmt, "s", $artist);
+            }
+        }
+    } elseif (isSpecified($type)) {
+        if (isSpecified($movement)) {
+            # *, *, T, M 
+            mysqli_stmt_bind_param($stmt, "ss", $type, $movement);
+        } else {
+            # *, *, T, *
+            mysqli_stmt_bind_param($stmt, "s", $type);
+        }
+    } elseif (isSpecified($movement)) {
+        # *, *, *, M
+        mysqli_stmt_bind_param($stmt, "s", $movement);
+    } else {
+        # *, *, *, * no binding required
+    }
+}
