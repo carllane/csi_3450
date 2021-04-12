@@ -13,8 +13,17 @@
     <input type="text" name="yearmade" id="yearmade"></input><br>
 
     <label for="mvmtname">Movement Name</label><br>
-    <input type="text" name="mvmtname" id="mvmtname"></input><br>
+    <select class="dropdown" id="mvmtname" name="mvmtname">
+        <?php 
+            $sql = "SELECT * FROM Movement";
+            $result = mysqli_query($link, $sql) or die(mysqli_error($link));
 
+            while($row = mysqli_fetch_array($result)) {
+                echo "<option value='".$row['NAME']."'>".$row['NAME']."</option>";
+            }
+        ?>
+    </select><br>
+    
     <label for="price">Price</label><br>
     <input type="text" name="price" id="price"></input><br>
 
