@@ -256,7 +256,7 @@ function deleteToursAdmin($link, $guide_id, $date, $time) {
 
 function deleteArtworkAdmin($link, $artworkName, $artist, $type, $movement) {
     # Prepare delete statement of tours in admin role
-    $sql = "DELETE FROM artwork WHERE Name= ?";
+    $sql = "DELETE FROM artwork WHERE ArtworkID= ?";
     $stmt = mysqli_stmt_init($link);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../artwork.php?error=stmtfailed");
