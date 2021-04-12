@@ -9,12 +9,12 @@ if (isset($_REQUEST['btguide']) && isset($_REQUEST['btdate']) && isset($_REQUEST
     $ttime = $_REQUEST['bttime'];
     $partySize = isset($_REQUEST['size']) ? $_REQUEST['size'] : 1;
 
-    if (isset($_SESSION['visitor-logged-in'])) {
-        $visitor_id = $_SESSION['visitor-logged-in'];
+    if (isset($_SESSION['employee-logged-in'])) {
+        $employee_id = $_SESSION['employee-logged-in'];
 
-        # Remove visitor - tour relationship into database
+        # Remove tour relationship from database
         $guide_id = getGuideData($link, $tguide)['ID'];
-        $success = deleteToursAdmin($link, $guide_id, $tdate, $ttime, $visitor_id, $partySize);
+        $success = deleteToursAdmin($link, $guide_id, $tdate, $ttime);
 
         if (!$success) {
             header("location: ../tours.php?error=bad_delete");
