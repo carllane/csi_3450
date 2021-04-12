@@ -13,8 +13,8 @@ if (isset($_REQUEST['submit']) && isset($_REQUEST['tguide']) && isset($_REQUEST[
     # Insert a new tour into tour database
     insertNewTour($link, $tguideid, $datetime, $spotsleft);
 
-    // header("location: ../manage.php?success=true");
-    // exit();
+    header("location: ../manage.php");
+    exit();
 } else {
     header("location: ../manage.php");
     exit();

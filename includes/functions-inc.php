@@ -230,9 +230,23 @@ function insertNewTour($link, $tguideid, $datetime, $spotsleft) {
         header("location: ../manage.php?error=stmtfailed");
         exit();
     }
-    $datetime = '2025-01-02 22:00:00';
-    mysqli_stmt_bind_param($stmt, "isi", $tguideid, $datetime, $spotsleft);
-    echo $stmt;
+
+    mysqli_stmt_bind_param($stmt, "sss", $tguideid, $datetime, $spotsleft);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
+}
+
+function insertNewArtwork($link, $imageurl, $artwork_name, $artist, $year_made, $movement_name, $price, $type) {
+    $sql = "INSERT INTO `artwork`(`Image`, `Name`, `Artist`, `YearMade`, `MovementName`, `Price`, `Type`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = mysqli_stmt_init($link);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../manage.php?error=stmtfailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sssssss", $imageurl, $artwork_name, $artist, $year_made, $movement_name, $price, $type);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     return true;
