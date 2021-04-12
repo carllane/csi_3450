@@ -268,7 +268,7 @@ function deleteToursAdmin($link, $guide_id, $date, $time) {
     return true;
 }
 
-function deleteArtworkAdmin($link, $artworkName, $artist, $type, $movement) {
+function deleteArtworkAdmin($link, $artwork_id) {
     # Prepare delete statement of tours in admin role
     $sql = "DELETE FROM artwork WHERE ArtworkID= ?";
     $stmt = mysqli_stmt_init($link);
@@ -276,6 +276,10 @@ function deleteArtworkAdmin($link, $artworkName, $artist, $type, $movement) {
         header("location: ../artwork.php?error=stmtfailed");
         exit();
     }
+    mysqli_stmt_bind_param($stmt, "s", $artwork_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return true;
 }
 
 /*
