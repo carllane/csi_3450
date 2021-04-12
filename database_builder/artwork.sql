@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2021 at 04:05 AM
+-- Generation Time: Apr 12, 2021 at 04:11 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -43,7 +43,7 @@ CREATE TABLE `artwork` (
 --
 
 INSERT INTO `artwork` (`ArtworkID`, `Image`, `Name`, `Artist`, `YearMade`, `MovementName`, `Price`, `Type`) VALUES
-(1, 'https://en.wikipedia.org/wiki/Mona_Lisa#/media/File:Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg', 'Mona Lisa', 'Leonardo de Vinci', 1517, 'Renaissance', '$100 million', 'Painting'),
+(1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/300px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpgg', 'Mona Lisa', 'Leonardo de Vinci', 1517, 'Renaissance', '$100 million', 'Painting'),
 (2, 'https://www.vangoghgallery.com/img/starry_night_full.jpg', 'The Starry Night', 'Vincent Van Gogh', 1889, 'Post-Impressionism', '$100 million', 'Painting'),
 (3, 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/400px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg', 'The Birth of Venus', 'Sandro Botticelli', 1485, 'Renaissance', '$500 million', 'Painting'),
 (4, 'https://upload.wikimedia.org/wikipedia/en/thumb/7/74/PicassoGuernica.jpg/350px-PicassoGuernica.jpg', 'Guernica', 'Pablo Picasso', 1937, 'Cubism', '$200 million', 'Painting'),
