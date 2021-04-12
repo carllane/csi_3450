@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2021 at 10:23 PM
+-- Generation Time: Apr 12, 2021 at 03:58 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -38,7 +38,13 @@ CREATE TABLE `movement` (
 --
 
 INSERT INTO `movement` (`NAME`, `StartYear`, `EndYear`) VALUES
-('Renaissance', 1400, 1600);
+('Contemporary Art', 1970, 2021),
+('Cubism', 1907, 1914),
+('Fauvism', 1900, 1935),
+('Impressionism', 1865, 1885),
+('Post-Impressionism', 1885, 1910),
+('Renaissance', 1400, 1600),
+('Romanticism', 1780, 1850);
 
 --
 -- Indexes for dumped tables
