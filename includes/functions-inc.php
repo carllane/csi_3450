@@ -469,3 +469,4 @@ function anyInput($stmt, $artworkName, $artist, $type, $movement) {
         # *, *, *, * no binding required
     }
 }
+}
